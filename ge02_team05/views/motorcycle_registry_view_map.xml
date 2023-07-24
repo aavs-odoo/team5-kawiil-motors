@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="registry_view_map" model="ir.ui.view">
+        <field name="name">registry.view.map</field>
+        <field name="model">motorcycle.registry</field>
+        <field name="inherit_id" ref="motorcycle.menu_registry">
+        <field name="arch" type="xml">
+            <map res_partner="owner_id">
+                <field name="owner_id" string="Customer Name"/>
+            </map>
+        </field>
+    </record>
+</odoo>

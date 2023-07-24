@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="registry_map_action" model="ir.actions.act_window">   
+        <field name="name">Motorcycle Registry</field>      
+        <field name="res_model">motorcycle.registry</field> 
+        <field name="view_mode">map,tree</field>
+    </record>
+    <menuitem id="menu_motorcycle_map" name="Map Views" sequence="4" action="registry_map_action"/>
+</odoo>
