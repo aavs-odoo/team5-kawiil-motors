@@ -6,7 +6,7 @@
     "description": """
     Motorcycle Serial Number Generator
 ====================
-    This Module automatically generates the VIN and Serial Number depending on its Sale Order and Manufacturing Orders.
+    This Module automatically generates the lot serial number depending on its VIN.
     """,
     
     "version": "0.1",
