@@ -4,17 +4,11 @@
         <field name="name">motorcycle.registry.view.map</field>
         <field name="model">motorcycle.registry</field>
         <field name="arch" type="xml">
-            <map res_partner="owner_id" routing="1" js_class="project_map">
+            <map res_partner="owner_id" js_class="project_map">
                 <field name="owner_id" string="Customer"/>
+                <field name="address" string="Address"/>
+                <field name="country" string="Country"/>
             </map>
         </field>
     </record>
-
-    <!-- <record id="registry_map_action" model="ir.actions.act_window.view">
-        <field name="name">registry.map.action</field>
-        <field name="model">motorcycle.registry</field>
-        <field name="view_mode">map</field>
-        <field name="act_window_id" ref="motorcycle.registry_list_action"/>
-        <field name="view_id" ref="motorcycle_registry_view_map"/>
-    </record> -->
 </odoo>

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <record id="registry_map_action" model="ir.actions.act_window.view">   
-        <field name="sequence" eval="60"/>
         <field name="view_mode">map</field>
+        <field name="sequence" eval="60"/>
         <field name="act_window_id" ref="motorcycle_registry.registry_list_action"/>
         <field name="view_id" ref="motorcycle_registry_view_map"/>
     </record>
-    <!-- <menuitem id="menu_motorcycle_map" name="Map Views" sequence="4" action="registry_map_action"/> -->
 </odoo>
