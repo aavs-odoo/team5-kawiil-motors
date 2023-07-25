@@ -24,5 +24,5 @@
     
     "website": "www.odoo.com",
     
-    "application": False,
+    "application": True,
 }
