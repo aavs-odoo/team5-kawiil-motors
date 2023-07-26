@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_order_form_inherit_motorcycle_registry" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.motorcycle.registry</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr='//group[@name="sale_total"]' position="inside">
+                <button string="Apply First Timer Discount" attrs="{'invisible': [('is_new_customer', '!=', True)]}"></button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
+
+<!-- name="apply_first_order_discount" attrs="{'invisible': [('is_new_customer', '!=', True)]}" -->
