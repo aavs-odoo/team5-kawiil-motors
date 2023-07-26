@@ -11,13 +11,15 @@
     
     "license": "OPL-1",
     
-    "depends": ["motorcycle_registry", "sale", "stock"],
+    "depends": ["motorcycle_registry", "sale", "website_sale", "stock", "product"],
     
     "data": [
-        # 'views/sale_order_inherit.xml',
+        'views/sale_order_inherit.xml',
+        'data/pricelist_info.xml',
     ],
     
-    "demo": [],
+    "demo": [
+    ],
     
     "author": "Ignacio Moral (IGCM) - Team 05",
     

@@ -1,1 +1,1 @@
-from . import motorcycle_registry
+from . import res_partner, sale_order

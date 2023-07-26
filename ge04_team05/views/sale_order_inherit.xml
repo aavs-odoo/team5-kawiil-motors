@@ -5,8 +5,11 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-            <xpath expr='//group[@name="sale_total"]' position="inside">
-                <button string="Apply First Timer Discount" attrs="{'invisible': [('is_new_customer', '!=', True)]}"></button>
+            <field name="partner_shipping_id" position="after">
+                <field name="customer_type"/>
+            </field>
+            <xpath expr='//group[@name="sale_header"]' position="after">
+                <button string="Apply First Timer Discount"></button>
             </xpath>
         </field>
     </record>
