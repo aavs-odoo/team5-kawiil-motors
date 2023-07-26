@@ -19,10 +19,13 @@ class MotorycleLot(models.Model):
                     lot.name = self.env['stock.lot'].generate_lot_names(last_serial.name, 2)[1]
 
                 else:
-                    lot_template = lot.product_id.product_tmpl_id
-                    serial_template = lot_template.make + lot_template.model + str(lot_template.year) + lot_template.battery_capacity.upper()
-                    lot.name = serial_template + '000000'
+                    lot.name = self.generate_format(lot.product_id.product_tmpl_id)
+
             else:
-                lot_template = lot.product_id.product_tmpl_id
-                serial_template = lot_template.make + lot_template.model + str(lot_template.year) + lot_template.battery_capacity.upper()
-                lot.name = serial_template + '000000'
+                lot.name = self.generate_format(lot.product_id.product_tmpl_id)
+
+    # Genera el formato del numero serial a partir del VIN.
+    # Toma los datos de make, model y year del template del producto seleccionado en el lot form.
+    def generate_format(self, lot_template):
+        serial_template = lot_template.make + lot_template.model + str(lot_template.year) + lot_template.battery_capacity.upper()
+        return serial_template + '000000'
