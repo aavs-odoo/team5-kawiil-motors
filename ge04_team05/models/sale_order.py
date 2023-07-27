@@ -11,3 +11,8 @@ class SaleOrder(models.Model):
         for order in self:
             order.pricelist_id = 3
             order.action_update_prices()
+
+class SaleOrder(models.Model):
+    _inherit="sale.order"
+    customer_type = fields.Boolean(related="partner_id.is_new_customer")
+

@@ -6,11 +6,18 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <field name="partner_shipping_id" position="after">
+
                 <field name="is_new_customer"/>
             </field>
             <xpath expr='//group[@name="sale_header"]' position="after">
                 <button name="setpricelist" string="Apply First Timer Discount" type="object"
                 attrs="{'invisible': ['|', ('is_new_customer', '=', True), ('state','not in', ['draft'])]}"></button>
+
+                <field name="customer_type"/>
+            </field>
+            <xpath expr='//group[@name="sale_header"]' position="after">
+                <button string="Apply First Timer Discount"></button>
+
             </xpath>
         </field>
     </record>
