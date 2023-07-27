@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="repair_form_inherit_motorcycles" model="ir.ui.view">
+            <field name="name">repair.form.inherit.motorcycles</field>
+            <field name="model">repair.order</field>
+            <field name="inherit_id" ref="repair.view_repair_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group" position="after">
+                    <group>
+                        <field name="vin"/>
+                        <field name="mileage"/>
+                        <field name="registry_id"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
