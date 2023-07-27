@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class MotorcycleRegistry(models.Model):
@@ -21,11 +21,4 @@ class MotorcycleRegistry(models.Model):
             else:
                 action['views'] = form_view
             action['res_id'] = repair_orders.id
-        # Prepare the context.
-        # repair_order = repair_orders.filtered(lambda l: l.vin is not False)
-        # if repair_order:
-        #     repair_order = repair_order[0]
-        # else:
-        #     repair_order = repair_orders[0]
-        # action['context'] = dict(self._context, default_partner_id=self.owner_id.id, default_origin=self.registry_number)
         return action
