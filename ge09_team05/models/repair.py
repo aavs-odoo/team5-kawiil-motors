@@ -5,7 +5,9 @@ class RepairOrder(models.Model):
     _inherit='repair.order'
 
     vin = fields.Char(string='VIN', required=True)
+
     mileage = fields.Float(string='Mileage', required=True)
+
     registry_id = fields.Many2one(compute="_get_registry_from_vin", comodel_name="motorcycle.registry")
     partner_id = fields.Many2one(related="registry_id.owner_id", string="Owner")
     sale_order_id = fields.Many2one(related="registry_id.sale_id", string="Sales")
