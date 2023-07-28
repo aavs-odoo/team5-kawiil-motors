@@ -5,27 +5,29 @@ import re
 class MotorycleLot(models.Model):
     _inherit = "stock.lot"
 
-    @api.onchange('product_id')
-    def _compute_serial_VIN(self):
-        lot_registries = self.filtered(lambda r: r.product_id.product_tmpl_id.detailed_type == 'motorcycle')
-        for lot in lot_registries:
+    @api.model
+    def _get_next_serial(self, company, product):
+        """Return the next serial number to be attributed to the product."""
+        res = super()._get_next_serial(company, product)
+
+        if product.tracking != "none" and product.product_tmpl_id.detailed_type == 'motorcycle':
             last_serial = self.env['stock.lot'].search(
-                [('product_id', '=', lot.product_id.id)],
+                [('company_id', '=', company.id), ('product_id', '=', product.id)],
                 limit=1, order='id DESC')
             if last_serial:
-                pattern = '^[A-Z]{4}\d{2}[A-Z0-9]{2}\d{6}$'
+                pattern = '^[A-Z]{4}\d{2}[A-Z0-9]{2}\d{5}$'
                 match = re.match(pattern, last_serial.name)
+                print("test serial", last_serial.name)
                 if match:
-                    lot.name = self.env['stock.lot'].generate_lot_names(last_serial.name, 2)[1]
-
+                    return self.env['stock.lot'].generate_lot_names(last_serial.name, 2)[1]
                 else:
-                    lot.name = self.generate_format(lot.product_id.product_tmpl_id)
-
+                    return self.generate_format(product.product_tmpl_id)
             else:
-                lot.name = self.generate_format(lot.product_id.product_tmpl_id)
+                return self.generate_format(product.product_tmpl_id)
 
-    # Genera el formato del numero serial a partir del VIN.
-    # Toma los datos de make, model y year del template del producto seleccionado en el lot form.
+        return res
+
+
     def generate_format(self, lot_template):
         serial_template = lot_template.make + lot_template.model + str(lot_template.year) + lot_template.battery_capacity.upper()
-        return serial_template + '000000'
+        return serial_template + '00000'
