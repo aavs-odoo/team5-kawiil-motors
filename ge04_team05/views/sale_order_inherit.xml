@@ -10,7 +10,7 @@
             </field>
             <xpath expr='//group[@name="sale_header"]' position="after">
                 <button name="setpricelist" string="Apply First Timer Discount" type="object"
-                attrs="{'invisible': ['|', ('is_new_customer', '=', True), ('state','not in', ['draft'])]}"></button>
+                attrs="{'invisible': ['|', ('is_new_customer', '=', False), ('state','not in', ['draft'])]}"></button>
             </xpath>
         </field>
     </record>
