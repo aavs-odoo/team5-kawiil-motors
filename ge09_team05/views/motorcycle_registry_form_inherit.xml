@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="motorcycle_registry_inherit_repair_order" model="ir.ui.view">
+            <field name="name">motorcycle.registry.inherit.repair.order</field>
+            <field name="model">motorcycle.registry</field>
+            <field name="inherit_id" ref="motorcycle_registry.motorcycle_registry_view_form"/>
+            <field name="arch" type="xml">
+                <field name="picture" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object"
+                            name="action_view_repair"
+                            class="oe_stat_button"
+                            icon="fa-wrench"
+                            groups="stock.group_stock_user">
+                            <field name="repair_orders" widget="statinfo" string="Repair"/>
+                        </button>
+                    </div>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
