@@ -24,3 +24,5 @@
 <!-- env['res.partner'].search_read([], ['name', 'is_new_customer']) -->
 
 <!-- env['product.template'].search_read([], ['id', 'name', 'uom_name']) -->
+
+<!-- recuerda quitar el codigo comentado antes de enviarlo, aunque siempre pasa :'v -->

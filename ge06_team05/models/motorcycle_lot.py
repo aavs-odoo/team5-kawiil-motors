@@ -17,6 +17,7 @@ class MotorycleLot(models.Model):
             if last_serial:
                 pattern = '^[A-Z]{4}\d{2}[A-Z0-9]{2}\d{5}$'
                 match = re.match(pattern, last_serial.name)
+                # hay que quitar los prints
                 print("test serial", last_serial.name)
                 if match:
                     return self.env['stock.lot'].generate_lot_names(last_serial.name, 2)[1]

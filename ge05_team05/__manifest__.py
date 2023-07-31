@@ -19,7 +19,7 @@ This Module is used to set a Warehouse in a Sale Order as a default
     
     "data": [
         'views/sale_template_inherit.xml',
-
+# hay que eliminar lso archivos que no usas
     ],
     
     "demo": [
