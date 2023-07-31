@@ -21,7 +21,6 @@ class CurstomerPortal(portal.CustomerPortal):
         return values
         
     def _prepare_motorcycle_registries_domain(self, partner):
-        print("domain original",partner.id)
         return ['|',('is_public','=',True),('owner_id','child_of',partner.id)]
 
     def _prepare_motorcycle_search_domain(self, partner, registry_search):      
@@ -31,15 +30,15 @@ class CurstomerPortal(portal.CustomerPortal):
             'name': ('owner_id.name', 'like', registry_search['name']),
             'state': ('owner_id.state_id.name', 'like', registry_search['state']),
             'country': ('owner_id.country_id.name', 'like', registry_search['country']),
-            'make': ('make', '=ilike', registry_search['make']),
-            'model': ('model', '=ilike', registry_search['model']),
+            'make': ('make', '=', registry_search['make']),
+            'model': ('model', '=', registry_search['model']),
             }
         
         for key in registry_search:
-            if key in list(searchable_fields):
+            if registry_search[key] != '':
                 domain.append(searchable_fields[key])
 
-        return domain + self._prepare_motorcycle_registries_domain(partner)
+        return domain + (self._prepare_motorcycle_registries_domain(partner))
 
     def _prepare_registry_domain(self, partner):
         return [

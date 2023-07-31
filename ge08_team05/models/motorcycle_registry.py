@@ -5,7 +5,7 @@ class MotorcycleRegistry(models.Model):
     _name = 'motorcycle.registry'
     _inherit = ['motorcycle.registry', 'portal.mixin']
 
-    is_public = fields.Boolean(string="Public Profile", default=False)
+    is_public = fields.Boolean(string="Public Profile", default=True)
 
     def _compute_access_url(self):
         super()._compute_access_url()
