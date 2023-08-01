@@ -22,3 +22,4 @@ class MotorcycleRegistry(models.Model):
                 action['views'] = form_view
             action['res_id'] = repair_orders.id
         return action
+      

@@ -9,5 +9,11 @@ class SaleOrder(models.Model):
 
     def setpricelist(self):
         for order in self:
-            order.pricelist_id = 3
-            order.action_update_prices()
+            order.pricelist_id = self.env.ref('ge04_team05.list_new_customers_motorcycle')
+            self.action_update_prices()
+            order.is_new_customer = False
+    
+    def _get_update_prices_lines(self):
+        return self.order_line.filtered(lambda line: line.product_type == "motorcycle")
+
+
