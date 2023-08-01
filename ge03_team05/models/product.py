@@ -8,8 +8,6 @@ class ProductTemplate(models.Model):
     def _generate_name(self):
         product_registries = self.filtered(lambda r: r.detailed_type == 'motorcycle')
         for product in product_registries:
-            if product.make == False:
-                product.make = '--'
-            if product.model == False:
-                product.model = '--' 
+            product.make = product.make or '--'
+            product.model = product.model or '--'
             product.name = str(product.make) + str(product.model) + str(product.year)

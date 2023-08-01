@@ -17,7 +17,8 @@ This module is used so that customers are able to choose if they want to make th
     
     "depends": ["motorcycle_registry", "ge07_team05"],
     
-    "data": ["views/motorcycle_registry_portal_templates.xml",
+    "data": [
+        "views/motorcycle_registry_portal_templates.xml",
     ],
     
     "demo": [

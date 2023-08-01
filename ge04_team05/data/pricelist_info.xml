@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-        <record model="product.pricelist" id="product.list0">
-            <field name="selectable" eval="False" />
-            <field name="sequence">4</field>
-            <field name="currency_id" ref="base.MXN" />
-        </record>
-        <record id="list_new_customers_motorcycle" model="product.pricelist">
-            <field name="name">New Customer</field>
-            <field name="selectable" eval="False" />
-            <field name="sequence">20</field>
-        </record>
-        <record id="item_new_customer_motorcycle" model="product.pricelist.item">
-            <field name="pricelist_id" ref="list_new_customers_motorcycle"/>
-            <field name="compute_price">formula</field>
-            <field name="base">list_price</field>
-            <field name="price_discount">0.00</field>
-            <field name="price_surcharge">-2500.00</field>
-            <field name="min_quantity">1</field>
-             <!-- <field name="product_tmpl_id" ref="18"/> -->
-        </record>
+    <record model="product.pricelist" id="product.list0">
+        <field name="selectable" eval="False" />
+        <field name="sequence">4</field>
+        <field name="currency_id" ref="base.MXN" />
+    </record>
+    
+    <record id="list_new_customers_motorcycle" model="product.pricelist">
+        <field name="name">New Customer</field>
+        <field name="selectable" eval="False" />
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="item_new_customer_motorcycle" model="product.pricelist.item">
+        <field name="pricelist_id" ref="list_new_customers_motorcycle"/>
+        <field name="compute_price">formula</field>
+        <field name="base">list_price</field>
+        <field name="price_discount">0.00</field>
+        <field name="price_surcharge">-2500.00</field>
+        <field name="min_quantity">1</field>
+    </record>
 </odoo>
-
-<!-- env['res.partner'].search_read([], ['name', 'is_new_customer']) -->
-
-<!-- env['product.template'].search_read([], ['id', 'name', 'uom_name']) -->

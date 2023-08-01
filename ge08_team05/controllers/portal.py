@@ -105,7 +105,6 @@ class CurstomerPortal(portal.CustomerPortal):
     website=True)
     def portal_my_registries(self, **kwargs):
         values = self._prepare_motorcycle_registry_portal_rendering_values(motorcycle_registries_page=True, **kwargs)
-        #request.session['my_quotations_history'] = values['registries'].ids[:100]
         return request.render("ge08_team05.portal_my_registries", values)
 
     @http.route(['/my/registry/<int:registry_id>'], type='http', auth="public", website=True)

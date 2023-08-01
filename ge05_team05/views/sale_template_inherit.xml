@@ -11,5 +11,16 @@
                 </xpath>
             </field>
         </record>
+
+        <record model="ir.ui.view" id="view_country_state_tree_inherit_kawiil">
+            <field name="name">view.country.state.tree.inherit.kawiil</field>
+            <field name="model">res.country.state</field>
+            <field name="inherit_id" ref="base.view_country_state_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='country_id']" position="after">
+                    <field name="warehouse_id" options="{'no_create': True, 'no_open': True}"/>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>

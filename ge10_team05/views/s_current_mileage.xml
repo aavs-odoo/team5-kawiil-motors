@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- <template id="assets_frontend_snippets" inherit_id="website.assets_frontend" name="Website Snippet">
-        <xpath expr="." position="inside">
-            <script type="text/javascript" src="/ge10_team05/static/src/js/javascript.js"></script>
-        </xpath>
-    </template> -->
-
     <record id="ge10_team05.website_snippet" model="ir.asset">
         <field name="name">Website Snippet</field>
         <field name="bundle">web.assets_frontend</field>
@@ -14,7 +8,7 @@
 
     <template id="registry_snippet_id" inherit_id="website.snippets" name="Mileage Counter">
         <xpath expr="//div[@id='snippet_effect']/div[hasclass('o_panel_body')]" position="inside">
-            <t t-snippet="ge10_team05.snippet_registry"/> <!-- Aqui tambien se utiliza t-thumbnail="[link a servidor, link a imagen de servidor, link a imagen de modulo, link a imagen data64]"-->
+            <t t-snippet="ge10_team05.snippet_registry"/>
         </xpath>
     </template>
 
@@ -32,4 +26,3 @@
         </section>
     </template>
 </odoo>
-

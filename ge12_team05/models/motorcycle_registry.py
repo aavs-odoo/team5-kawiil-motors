@@ -22,7 +22,6 @@ class MotorcycleRegistry(models.Model):
      
     @api.depends('users')
     def action_grant_access(self, user, internal, portal):
-
         group_portal = self.env.ref('base.group_portal')
         group_user = self.env.ref('base.group_user')
 

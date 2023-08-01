@@ -17,7 +17,6 @@ class MotorycleLot(models.Model):
             if last_serial:
                 pattern = '^[A-Z]{4}\d{2}[A-Z0-9]{2}\d{5}$'
                 match = re.match(pattern, last_serial.name)
-                print("test serial", last_serial.name)
                 if match:
                     return self.env['stock.lot'].generate_lot_names(last_serial.name, 2)[1]
                 else:
@@ -26,7 +25,6 @@ class MotorycleLot(models.Model):
                 return self.generate_format(product.product_tmpl_id)
 
         return res
-
 
     def generate_format(self, lot_template):
         serial_template = lot_template.make + lot_template.model + str(lot_template.year) + lot_template.battery_capacity.upper()

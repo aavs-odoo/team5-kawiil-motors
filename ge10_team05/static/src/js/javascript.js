@@ -19,6 +19,5 @@ odoo.define('ge10_team05.motorcycles', ['web.ajax'], function(require) {
                 }
             })
         }
-
     })
 });

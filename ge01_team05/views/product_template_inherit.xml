@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="sale.product_template_action" model="ir.actions.act_window">
-
         <field name="context">{'search_default_filter_to_sell': 0, 'search_default_filter_to_motorcycles': 1}</field>
-
     </record>
 
-    <record id="motorcycle_search_view" model="ir.ui.view">
-        <field name="name">motorcycle.search.view</field>
+    <record id="motorcycle_search_view_inherit_kawiil" model="ir.ui.view">
+        <field name="name">motorcycle.search.view.inherit.kawiil</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_search_view"/>
         <field name="arch" type="xml">
@@ -16,6 +14,5 @@
                 <filter string="Motorcycles" name="filter_to_motorcycles" domain="[('detailed_type', '=', 'motorcycle')]"/>
             </xpath>
         </field>
-
     </record>
 </odoo>
