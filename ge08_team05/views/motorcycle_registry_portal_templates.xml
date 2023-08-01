@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_menu_registry" name="Portal layout : sales menu entries" inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'motorcycle_registries' or registry" t-attf-class="breadcrumb-item #{'active ' if not motorcycle_registries else ''}">
+                <a t-if="registry" t-attf-href="/my/motorcycle_registries">Motorcycle Registries</a>
+                <t t-else="">Motorcycle Registries</t>
+            </li>
+            <li t-if="registry" class="breadcrumb-item active">
+                <t t-out="registry.registry_number"/>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_motorcycle_registry" name="Motorcycle Registries" customize_show="True" inherit_id="portal.portal_my_home" priority="20">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Motorcycle Registries</t>
+                <t t-set="url" t-value="'/my/motorcycle_registries'"/>
+                <t t-set="placeholder_count" t-value="'registry_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_registries" name="My Registries">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Registries</t>
+            </t>
+            <a href="/my/search_registries">Busca aqui a tus contactos!</a>
+            <t t-if="registries" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Registry Number</th>
+                        <th class="text-end">VIN</th>
+                        <th class="text-end">Owner</th>
+                        <th class="text-center"/>
+                        <th class="text-end">Mileage</th>
+                    </tr>
+                </thead>
+                <t t-foreach="registries" t-as="registry">
+                    <tr>
+                        <td><a t-att-href="registry.get_portal_url()"><t t-out="registry.registry_number"/></a></td>
+                        <td class="text-end"><span t-field="registry.vin"/></td>
+                        <td class="text-end"><span t-field="registry.owner_id.name"/></td>
+                        <td class="text-end">
+                            <span t-field="registry.current_mileage"/>
+                        </td>
+                    </tr>
+                </t>
+            </t>
+            <p t-else="">There are currently no registries for your account.</p>
+        </t>
+    </template>
+
+    <template id="portal_my_registry" name="My Motorcycle Registry">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Motorcycle Registry</t>
+            </t>
+            <t t-if="registries" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>
+                            <span class='d-none d-md-inline'>Registry Number</span>
+                        </th>
+                        <th class="text-end">Order Date</th>
+                        <th class="text-center"/>
+                        <th class="text-end">Total</th>
+                    </tr>
+                </thead>
+                <t t-foreach="registries" t-as="registry">
+                    <tr>
+                        <td><a t-att-href="registry.get_portal_url()"><t t-out="registry.registry_number"/></a></td>
+                        <td class="text-end">
+                            <span t-field="registry.owner_id" t-options="{'widget': 'date'}"/>&amp;nbsp;
+                            <span class='d-none d-md-inline' t-field="registry.vin" t-options="{'time_only': True}"/>
+                        </td>
+                        <td class="text-end"><span t-field="registry.current_mileage"/></td>
+                    </tr>
+                </t>
+            </t>
+            <p t-else="">There are currently no registries for your account.</p>
+        </t>
+    </template>
+    
+    <template id="registry_portal_template" name="Registry Portal Template" inherit_id="portal.portal_sidebar" primary="True">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <t t-set="o_portal_fullwidth_alert" groups="motorcycle_registry.group_registry_admin">
+                <!-- Uses backend_url provided in rendering values -->
+                <t t-call="portal.portal_back_in_edit_mode"/>
+            </t>
+            <div id="quote_content" class="col-12 col-lg justify-content-end">
+                <div t-call="ge08_team05.registry_portal_content"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="registry_portal_content" name="Registry Portal Content">
+        <div t-attf-class="card-body">
+            <td class="text-end">
+                <th class="text-end">Registry Name:</th>
+                <p><span t-field="registry.registry_number"/></p>
+            </td>
+            <td class="text-end">
+                <th class="text-end">VIN:</th>
+                <p><span t-field="registry.vin"/></p>
+            </td>
+            <td class="text-end">
+                <th class="text-end">Make:</th>
+                <p><span t-field="registry.make"/></p>
+            </td>
+            <td class="text-end">
+                <th class="text-end">Model:</th>
+                <p><span t-field="registry.model"/></p>
+            </td>
+            <td class="text-end">
+                <th class="text-end">Mileage:</th>
+                <p><span t-field="registry.current_mileage"/></p>
+            </td>
+            <td class="text-end">
+                <th class="text-end">License Plate:</th>
+                <p><span t-field="registry.license_plate"/></p>
+            </td>
+            <td class="text-end">
+                <th class="text-end">Owner:</th>
+                <p><span t-field="registry.owner_id"/></p>
+            </td>
+            <td class="text-end">
+                <th class="text-end">Phone Number:</th>
+                <p><span t-field="registry.owner_phone"/></p>
+                </td>
+            <td class="text-end">
+                <th class="text-end">Email:</th>
+                <p><span t-field="registry.owner_email"/></p>
+            </td>
+            <form action='/my/registry/change_registry' method="post">
+                <div class="form-group form-field o_website_form_required_custom">     
+                    <div class="col-md-7 col-sm-8">       
+                        <th class="text-end">New Mileage:</th>
+                        <input type="text" class="form-control o_website_form_input" name="new_mileage" required=""/>  
+                        <th class="text-end">New License:</th> 
+                        <input type="text" class="form-control o_website_form_input" name="new_license" required=""/> 
+                        <div>
+                            <input type="checkbox" name="check_public" value="registry.is_public" id="IsPublicCheckbox"/>
+                            <label class="form-check-label" for="IsPublicCheckbox">
+                                Public Registry
+                            </label>
+                        </div>  
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <input type="hidden" name="registry_id" t-att-value="registry.id"/>
+                    </div>
+                </div>   
+                <button type="submit" class="btn btn-primary float-end mb32 ">
+                    Confirm
+                    <span class="fa fa-long-arrow-right" />
+                </button> 
+            </form>
+        </div>
+    </template>
+
+    <template id="registry_search_portal_template" name="Search Portal Template" inherit_id="portal.portal_sidebar" primary="True">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <t t-set="o_portal_fullwidth_alert" groups="motorcycle_registry.group_registry_admin">
+                <!-- Uses backend_url provided in rendering values -->
+                <t t-call="portal.portal_back_in_edit_mode"/>
+            </t>
+            <div id="quote_content" class="col-12 col-lg justify-content-end">
+                <div t-call="ge08_team05.registry_search_content"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="registry_search_content" name="Search Portal Content">
+        <div t-attf-class="card-body">
+            <form action='/my/motorcycle_registries' method="post">
+                <div class="form-group form-field o_website_form_required_custom">  
+                    <p>Search Riders!</p>   
+                    <div class="col-md-7 col-sm-8">       
+                        <th class="text-end">Name:</th>
+                        <input type="text" class="form-control o_website_form_input" name="name"/>  
+                        <th class="text-end">State:</th> 
+                        <input type="text" class="form-control o_website_form_input" name="state"/>
+                        <th class="text-end">Country:</th>
+                        <input type="text" class="form-control o_website_form_input" name="country"/>  
+                        <th class="text-end">Motorcycle Make:</th> 
+                        <input type="text" class="form-control o_website_form_input" name="make"/>
+                        <th class="text-end">Motorcycle Model:</th> 
+                        <input type="text" class="form-control o_website_form_input" name="model"/>     
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    </div>
+                </div>   
+                <button type="submit" class="btn btn-primary float-end mb32 ">
+                    Confirm
+                    <span class="fa fa-long-arrow-right" />
+                </button>  
+            </form>
+        </div>
+    </template>
+</odoo>
