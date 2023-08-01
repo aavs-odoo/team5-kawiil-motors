@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_menu_repair_orders" name="Portal layout : sales menu entries" inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'repair_orders' or repair_order" t-attf-class="breadcrumb-item #{'active ' if not repair_orders else ''}">
+                <a t-if="repair_order" t-attf-href="/my/repair_orders/">Repair Orders</a>
+                <t t-else="">Repair Orders</t>
+            </li>
+            <li t-if="repair_order" class="breadcrumb-item active">
+                <t t-out="repair_order.name"/>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_repair_orders" name="Repair Orders" customize_show="True" inherit_id="portal.portal_my_home" priority="20">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Repair Orders</t>
+                <t t-set="url" t-value="'/my/repair_orders/'"/>
+                <t t-set="placeholder_count" t-value="'orders_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_repair_orders" name="My Repair Orders">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Repair Orders</t>
+            </t>
+            <a href="/my/generate_repair_order/" class="link-success">Create New Repair Orders!</a>
+            <a href="/my/search_repair_orders/" class="link-secondary">Search Here your Repair Orders!</a>
+            <t t-if="repair_orders" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th class="text-end">Ticket Name</th>
+                        <th class="text-end">Owner</th>
+                        <th class="text-end">VIN</th>
+                        <th class="text-end">Mileage</th>
+                        <th class="text-center"/>
+                        <th class="text-end">Status</th>
+                    </tr>
+                </thead>
+                <t t-foreach="repair_orders" t-as="repair_order">
+                    <tr>
+                        <td><a t-att-href="repair_order.get_portal_url()"><t t-out="repair_order.name"/></a></td>
+                        <td class="text-end"><span t-field="repair_order.partner_id"/></td>
+                        <td class="text-end"><span t-field="repair_order.vin"/></td>
+                        <td class="text-end"><span t-field="repair_order.mileage"/></td>
+                        <td class="text-end"/>
+                        <td class="text-end"><span t-field="repair_order.state"/></td>
+                    </tr>
+                </t>
+            </t>
+            <t t-else="">There are currently no repair orders in your account.</t>
+        </t>
+    </template>
+    
+    <template id="portal_my_repair_order" name="My Motorcycle Repair Order">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Repair Order</t>
+            </t>
+            <a href="/my/generate_repair_order/" class="link-success">Create New Repair Orders!</a>
+            <a href="/my/search_repair_orders/"  class="link-secondary">Search Here your Repair Orders!</a>
+            <t t-if="repair_order" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th class="text-center">Ticket Name</th>
+                        <th class="text-center">Owner</th>
+                        <th class="text-center">VIN</th>
+                        <th class="text-center">Mileage</th>
+                        <th class="text-center">Status</th>
+                    </tr>
+                </thead>
+                <t t-foreach="repair_orders" t-as="repair_order">
+                    <tr>
+                        <td><a t-att-href="repair_order.get_portal_url()"><t t-out="repair_order.name"/></a></td>
+                        <td class="text-center">
+                            <span t-field="repair_order.partner_id"/>
+                        </td>
+                        <td class="text-center"><span t-field="repair_order.vin"/></td>
+                        <td class="text-center"><span t-field="repair_order.mileage"/></td>
+                        <td class="text-center"><span t-field="repair_order.state"/></td>
+                    </tr>
+                </t>
+            </t>
+            <t t-else="">There are currently no repair orders in your account!</t>
+        </t>
+    </template>
+    
+    <template id="repair_order_portal_template" name="Repair Order Portal Template" inherit_id="portal.portal_sidebar" primary="True">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <t t-set="o_portal_fullwidth_alert" groups="repair_order.group_registry_admin">
+                <t t-call="portal.portal_back_in_edit_mode"/>
+            </t>
+            <div id="quote_content" class="col-12 col-lg justify-content-end">
+                <div t-call="ge11_team05.repair_order_portal_content"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="repair_order_portal_content" name="Repair Order Portal Content">
+        <div t-attf-class="card-body">
+            <td class="text-end">
+                <th class="text-end">Repair Order Reference:</th>
+                <p><span t-field="repair_order.name"/></p>
+            </td>
+            <td class="text-end">
+                <th class="text-end">VIN:</th>
+                <p><span t-field="repair_order.vin"/></p>
+            </td>
+            <td class="text-end">
+                <th class="text-end">Mileage:</th>
+                <p><span t-field="repair_order.mileage"/></p>
+            </td>
+            <td class="text-end">
+                <th class="text-end">Product:</th>
+                <p><span t-field="repair_order.product_id"/></p>
+            </td>
+            <td class="text-end">
+                <th class="text-end">Owner:</th>
+                <p><span t-field="repair_order.partner_id"/></p>
+            </td>
+            <td class="text-end">
+                <th class="text-end">Status:</th>
+                <p><span t-field="repair_order.state"/></p>
+            </td>
+        </div>
+    </template>
+
+    <template id="generate_repair_order_portal_template" name="Generate Repair Order Portal Template" inherit_id="portal.portal_sidebar" primary="True">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <t t-set="o_portal_fullwidth_alert" groups="repair_order.group_registry_admin">
+                <t t-call="portal.portal_back_in_edit_mode"/>
+            </t>
+            <div id="quote_content" class="col-12 col-lg justify-content-end">
+                <div t-call="ge11_team05.generate_repair_order_portal_content"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="generate_repair_order_portal_content" name="Generate Repair Order Portal">
+        <form action='/my/generate_repair_orders' method="post">
+            <div class="form-group form-field o_website_form_required_custom">     
+                <div class="col-md-7 col-sm-8">       
+                    <th class="text-end">Vin:</th>
+                    <input type="text" class="form-control o_website_form_input" name="vin" required=""/>  
+                    <th class="text-end">Mileage:</th> 
+                    <input type="text" class="form-control o_website_form_input" name="mileage" required=""/> 
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                </div>
+            </div>   
+            <button type="submit" class="btn btn-primary float-end mb32">
+                Submit Repair Order
+                <span class="fa fa-long-arrow-right"/>
+            </button>    
+        </form>
+    </template>
+
+    <template id="repair_orders_search_portal_template" name="Search Repair Orders Portal Template" inherit_id="portal.portal_sidebar" primary="True">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <t t-set="o_portal_fullwidth_alert" groups="repair_orders.group_registry_admin">
+                <t t-call="portal.portal_back_in_edit_mode"/>
+            </t>
+            <div id="quote_content" class="col-12 col-lg justify-content-end">
+                    <div t-call="ge11_team05.repair_orders_search_content"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="repair_orders_search_content" name="Search Repair Orders Portal Content">
+        <div t-attf-class="card-body">
+            <form action='/my/repair_orders/' method="post">
+                <div class="form-group form-field o_website_form_required_custom">  
+                    <p>Search Repair Orders!</p>   
+                      <div class="col-md-7 col-sm-8">       
+                        <th class="text-end">Ticket Name:</th>
+                          <input type="text" class="form-control o_website_form_input" name="name"/>  
+                          <th class="text-end">VIN:</th> 
+                          <input type="text" class="form-control o_website_form_input" name="vin"/>  
+                          <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                      </div>
+                 </div>   
+                <button type="submit" class="btn btn-primary float-end mb32 ">
+                    Confirm
+                    <span class="fa fa-long-arrow-right" />
+                </button>  
+            </form>
+        </div>
+    </template>
+</odoo>
