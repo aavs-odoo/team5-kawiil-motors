@@ -1,0 +1,38 @@
+<odoo>
+    <record id="location_state_action" model="ir.actions.act_window">
+        <field name="name">State Locations</field>
+        <field name="res_model">location.state</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+    </record>
+
+    <record id="location_state_tree_view_zgroup" model="ir.ui.view">
+        <field name="name">location.state.tree</field>
+        <field name="model">location.state</field>
+        <field name="arch" type="xml">
+            <tree string="Locations State">
+                <field name="name"/>
+                <field name="warehouse_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="location_state_form_zgroup" model="ir.ui.view">
+        <field name="name">location.state.form</field>
+        <field name="model">location.state</field>
+        <field name="arch" type="xml">
+            <form string="Location State">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="warehouse_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="location_state_brand"
+            action="ge05_team05.location_state_action"
+            parent="stock.menu_warehouse_config" sequence="90" groups="stock.group_stock_storage_categories" />
+</odoo>
